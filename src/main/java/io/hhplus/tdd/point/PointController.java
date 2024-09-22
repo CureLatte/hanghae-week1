@@ -1,10 +1,14 @@
 package io.hhplus.tdd.point;
 
+import io.hhplus.tdd.point.dto.PatchRequestDto;
+import io.hhplus.tdd.point.record.PointHistory;
+import io.hhplus.tdd.point.record.UserPoint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/point")
@@ -50,8 +54,10 @@ public class PointController {
     @PatchMapping("{id}/charge")
     public UserPoint charge(
             @PathVariable long id,
-            @RequestBody long amount
+            @RequestBody Map<String, Long> requestBody
     ) {
+        Long amount = requestBody.get("amount");
+
         return new UserPoint(0, 0, 0);
     }
 
@@ -61,9 +67,9 @@ public class PointController {
     @PatchMapping("{id}/use")
     public UserPoint use(
             @PathVariable long id,
-            @RequestBody long amount
+            @RequestBody Map<String, Long> requestBody
     ) {
-        System.out.println(amount);
+        Long amount = requestBody.get("amount");
 
         return new UserPoint(0, 0, 0);
     }

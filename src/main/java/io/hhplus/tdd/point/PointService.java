@@ -1,5 +1,6 @@
 package io.hhplus.tdd.point;
 
+import io.hhplus.tdd.point.record.PointHistory;
 import org.springframework.stereotype.Service;
 
 @Service
