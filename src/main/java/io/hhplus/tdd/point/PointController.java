@@ -12,11 +12,11 @@ public class PointController {
 
     private static final Logger log = LoggerFactory.getLogger(PointController.class);
 
-    private PointService pointService;
+    final private PointService pointService;
 
     public PointController(PointService pointService) {
         this.pointService = pointService;
-
+        System.out.println("PointService 등록완료");
     }
 
 
@@ -28,11 +28,7 @@ public class PointController {
             @PathVariable long id
     ) {
 
-
         PointHistory pointHistory = this.pointService.getUserPointById(id);
-
-
-
 
 
         return new UserPoint(0, 0, 0);
@@ -67,6 +63,8 @@ public class PointController {
             @PathVariable long id,
             @RequestBody long amount
     ) {
+        System.out.println(amount);
+
         return new UserPoint(0, 0, 0);
     }
 }
