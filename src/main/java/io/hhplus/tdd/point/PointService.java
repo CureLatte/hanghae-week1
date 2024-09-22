@@ -1,6 +1,7 @@
 package io.hhplus.tdd.point;
 
 import io.hhplus.tdd.point.record.PointHistory;
+import io.hhplus.tdd.point.type.TransactionType;
 import org.springframework.stereotype.Service;
 
 @Service
