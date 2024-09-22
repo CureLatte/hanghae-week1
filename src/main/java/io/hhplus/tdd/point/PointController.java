@@ -32,10 +32,9 @@ public class PointController {
             @PathVariable long id
     ) {
 
-        PointHistory pointHistory = this.pointService.getUserPointById(id);
+        UserPoint userPoint = pointService.getUserPoint(id);
 
-
-        return new UserPoint(0, 0, 0);
+        return userPoint;
     }
 
     /**
