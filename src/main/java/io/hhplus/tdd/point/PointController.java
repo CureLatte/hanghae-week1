@@ -56,7 +56,9 @@ public class PointController {
     ) {
         Long amount = requestBody.get("amount");
 
-        return new UserPoint(0, 0, 0);
+
+
+        return this.pointService.chargePoint(id, amount);
     }
 
     /**
@@ -69,6 +71,8 @@ public class PointController {
     ) {
         Long amount = requestBody.get("amount");
 
-        return new UserPoint(0, 0, 0);
+
+
+        return this.pointService.usePoint(id, amount);
     }
 }

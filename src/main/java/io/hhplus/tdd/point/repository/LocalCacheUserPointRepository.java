@@ -4,8 +4,10 @@ import io.hhplus.tdd.database.PointHistoryTable;
 import io.hhplus.tdd.database.UserPointTable;
 import io.hhplus.tdd.point.record.PointHistory;
 import io.hhplus.tdd.point.record.UserPoint;
+import io.hhplus.tdd.point.type.TransactionType;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -32,13 +34,36 @@ public class LocalCacheUserPointRepository implements UserPointRepository {
     }
 
     @Override
-    public UserPoint useUserPointById(long id, long amount) {
+    public PointHistory insertUsePointById(long id, long amount) {
         // 포인트 사용
-        return null;
+
+        long updateMillis = new java.util.Date().getTime();
+
+        PointHistory pointHistory = this.pointHistoryTable.insert(id, amount, TransactionType.USE, updateMillis);
+
+        // point 조회
+        UserPoint userPoint = this.userPointTable.selectById(id);
+
+        this.userPointTable.insertOrUpdate(id, userPoint.point() - amount);
+
+        return pointHistory;
     }
 
     @Override
-    public UserPoint chargeUserPointById(long id, long amount) {
-        return null;
+    public PointHistory insertChargePointById(long id, long amount) {
+        // 포인트 충전
+        long updateMillis = new java.util.Date().getTime();
+
+        // history 추가
+        PointHistory pointHistory = this.pointHistoryTable.insert(id, amount, TransactionType.CHARGE, updateMillis);
+
+        // point 조회
+        UserPoint userPoint = this.userPointTable.selectById(id);
+
+        System.out.println("userPoint = " + userPoint);
+
+        this.userPointTable.insertOrUpdate(id, userPoint.point() + amount);
+
+        return pointHistory;
     }
 }

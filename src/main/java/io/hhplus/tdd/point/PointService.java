@@ -24,4 +24,17 @@ public class PointService {
         return this.userPointRepository.getUserPointById(id);
     }
 
+    public UserPoint chargePoint(long id, long amount){
+        PointHistory pointsHistory =  this.userPointRepository.insertChargePointById(id, amount);
+        return this.userPointRepository.getUserPointById(id );
+    }
+
+    public UserPoint usePoint(long id, long amount){
+        System.out.println("PointService on");
+        this.userPointRepository.insertUsePointById(id, amount);
+
+        return userPointRepository.getUserPointById(id);
+
+    }
+
 }
