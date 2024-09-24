@@ -36,8 +36,7 @@ public class PointService {
         // 남은 포인트 0원 일 때 Error
         UserPoint userPoint = this.userPointRepository.getUserPointById(id);
         if(userPoint.point() == 0){
-            ErrorResponse errorResponse = new ErrorResponse("400", "잔액이 부족합니다");
-            throw new RuntimeException(String.valueOf(errorResponse));
+            throw new IllegalArgumentException("잔액이 부족합니다");
         }
 
         this.userPointRepository.insertUsePointById(id, amount);
