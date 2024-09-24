@@ -7,8 +7,6 @@ import io.hhplus.tdd.point.record.UserPoint;
 import io.hhplus.tdd.point.type.TransactionType;
 import org.springframework.stereotype.Repository;
 
-import java.time.LocalDate;
-import java.util.HashMap;
 import java.util.List;
 
 @Repository

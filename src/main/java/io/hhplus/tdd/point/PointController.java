@@ -2,7 +2,6 @@ package io.hhplus.tdd.point;
 import io.hhplus.tdd.point.record.PointHistory;
 import io.hhplus.tdd.point.record.UserPoint;
 import io.hhplus.tdd.point.service.PointService;
-import io.hhplus.tdd.point.service.PointServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
