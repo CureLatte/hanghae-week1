@@ -1,12 +1,11 @@
 package io.hhplus.tdd.point;
-
-import io.hhplus.tdd.point.dto.PatchRequestDto;
 import io.hhplus.tdd.point.record.PointHistory;
 import io.hhplus.tdd.point.record.UserPoint;
+import io.hhplus.tdd.point.service.PointService;
+import io.hhplus.tdd.point.service.PointServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.Map;
 
@@ -20,7 +19,6 @@ public class PointController {
 
     public PointController(PointService pointService) {
         this.pointService = pointService;
-        System.out.println("PointService 등록완료");
     }
 
 
@@ -33,6 +31,7 @@ public class PointController {
     ) {
 
         return pointService.getUserPoint(id);
+
     }
 
     /**
@@ -43,7 +42,7 @@ public class PointController {
             @PathVariable long id
     ) {
 
-        return this.pointService.userPointRepository.getUserPointHistoryById(id);
+        return this.pointService.getUserPointHistoryListById(id);
     }
 
     /**
@@ -55,8 +54,6 @@ public class PointController {
             @RequestBody Map<String, Long> requestBody
     ) {
         Long amount = requestBody.get("amount");
-
-
 
         return this.pointService.chargePoint(id, amount);
     }
@@ -70,8 +67,6 @@ public class PointController {
             @RequestBody Map<String, Long> requestBody
     ) {
         Long amount = requestBody.get("amount");
-
-
 
         return this.pointService.usePoint(id, amount);
     }
