@@ -1,10 +1,9 @@
-package io.hhplus.tdd.unitTest.point.repository.LocalCacheUserPointRepository;
+package io.hhplus.tdd.unitTest.point.repository.localCacheUserPointRepository;
 
 import io.hhplus.tdd.database.PointHistoryTable;
 import io.hhplus.tdd.database.UserPointTable;
 import io.hhplus.tdd.point.repository.LocalCacheUserPointRepository;
 import org.junit.jupiter.api.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 public class TestLocalCacheUserPointRepository {
 

@@ -1,4 +1,4 @@
-package io.hhplus.tdd.unitTest.point.repository.LocalCacheUserPointRepository;
+package io.hhplus.tdd.unitTest.point.repository.localCacheUserPointRepository;
 
 import org.junit.jupiter.api.Test;
 
