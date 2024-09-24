@@ -1,7 +1,6 @@
 package io.hhplus.tdd.unitTest.point.service.pointServiceImpl;
 
-import io.hhplus.tdd.point.repository.LocalCacheUserPointRepository;
-import io.hhplus.tdd.point.repository.UserPointRepository;
+import io.hhplus.tdd.point.domain.repository.UserPointRepository;
 import org.junit.jupiter.api.*;
 
 public class TestPointService {

@@ -1,6 +1,6 @@
-package io.hhplus.tdd.point.repository;
-import io.hhplus.tdd.point.record.PointHistory;
-import io.hhplus.tdd.point.record.UserPoint;
+package io.hhplus.tdd.point.domain.repository;
+import io.hhplus.tdd.point.domain.entity.PointHistory;
+import io.hhplus.tdd.point.domain.entity.UserPoint;
 
 import java.util.List;
 

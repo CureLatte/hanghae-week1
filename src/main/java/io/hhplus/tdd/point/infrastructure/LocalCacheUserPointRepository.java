@@ -1,10 +1,11 @@
-package io.hhplus.tdd.point.repository;
+package io.hhplus.tdd.point.infrastructure;
 
 import io.hhplus.tdd.database.PointHistoryTable;
 import io.hhplus.tdd.database.UserPointTable;
-import io.hhplus.tdd.point.record.PointHistory;
-import io.hhplus.tdd.point.record.UserPoint;
-import io.hhplus.tdd.point.type.TransactionType;
+import io.hhplus.tdd.point.domain.entity.PointHistory;
+import io.hhplus.tdd.point.domain.entity.UserPoint;
+import io.hhplus.tdd.point.domain.repository.UserPointRepository;
+import io.hhplus.tdd.point.domain.vo.TransactionType;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

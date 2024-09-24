@@ -1,8 +1,8 @@
-package io.hhplus.tdd.point.service;
+package io.hhplus.tdd.point.application;
 
-import io.hhplus.tdd.point.record.PointHistory;
-import io.hhplus.tdd.point.record.UserPoint;
-import io.hhplus.tdd.point.repository.UserPointRepository;
+import io.hhplus.tdd.point.domain.entity.PointHistory;
+import io.hhplus.tdd.point.domain.entity.UserPoint;
+import io.hhplus.tdd.point.domain.repository.UserPointRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

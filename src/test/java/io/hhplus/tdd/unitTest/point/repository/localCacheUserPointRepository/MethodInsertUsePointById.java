@@ -1,8 +1,8 @@
 package io.hhplus.tdd.unitTest.point.repository.localCacheUserPointRepository;
 
-import io.hhplus.tdd.point.record.PointHistory;
-import io.hhplus.tdd.point.record.UserPoint;
-import io.hhplus.tdd.point.type.TransactionType;
+import io.hhplus.tdd.point.domain.entity.PointHistory;
+import io.hhplus.tdd.point.domain.entity.UserPoint;
+import io.hhplus.tdd.point.domain.vo.TransactionType;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
