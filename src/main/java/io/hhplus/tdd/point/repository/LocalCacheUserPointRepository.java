@@ -95,8 +95,6 @@ public class LocalCacheUserPointRepository implements UserPointRepository {
         // point 조회
         UserPoint userPoint = this.userPointTable.selectById(id);
 
-        System.out.println("userPoint = " + userPoint);
-
         this.userPointTable.insertOrUpdate(id, userPoint.point() + amount);
 
         return pointHistory;
