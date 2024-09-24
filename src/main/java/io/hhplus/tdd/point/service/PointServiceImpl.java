@@ -3,12 +3,13 @@ package io.hhplus.tdd.point.service;
 import io.hhplus.tdd.point.record.UserPoint;
 import io.hhplus.tdd.point.repository.UserPointRepository;
 
+
 public class PointServiceImpl implements PointService {
 
     final UserPointRepository userPointRepository;
 
-    final String ID_VALIDATOR_ERROR_MESSAGE = "잘못된 ID 입니다";
-    final String AMOUNT_VALIDATOR_ERROR_MESSAGE = "금액은 0원 이상이어야 합니다";
+    public final String ID_VALIDATOR_ERROR_MESSAGE = "잘못된 ID 입니다";
+    public final String AMOUNT_VALIDATOR_ERROR_MESSAGE = "금액은 0원 이상이어야 합니다";
 
 
     public PointServiceImpl(UserPointRepository userPointRepository) {
