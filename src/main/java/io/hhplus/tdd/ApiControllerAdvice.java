@@ -14,17 +14,11 @@ class ApiControllerAdvice extends ResponseEntityExceptionHandler {
 
         String errMessage = e.getMessage();
 
-        if(errMessage.isEmpty()){
+        if(errMessage.isEmpty()) {
             errMessage = "에러가 발생했습니다";
-        }
 
+        }
         return ResponseEntity.status(500).body(new ErrorResponse("500", errMessage));
     }
 
-    @ExceptionHandler(value = ErrorType.class)
-    public ResponseEntity<ErrorResponse> handleException(ErrorType e) {
-        ErrorResponse errorResponse = e.getErrorResponse();
-
-        return ResponseEntity.status(500).body(errorResponse);
-    }
 }
