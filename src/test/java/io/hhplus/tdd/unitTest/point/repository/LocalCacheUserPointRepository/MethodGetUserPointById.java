@@ -24,7 +24,7 @@ public class MethodGetUserPointById extends TestLocalCacheUserPointRepository {
         });
 
         // THEN
-        assertEquals(err.getMessage(), "잘못된 ID 입니다.");
+        assertEquals(err.getMessage(), this.userPointRepository.idValidateErrorMessage);
     }
 
 }

@@ -21,6 +21,6 @@ public class MethodGetUserPointHistoryById extends TestLocalCacheUserPointReposi
         });
 
         // THEN
-        assertEquals(err.getMessage(), "잘못된 ID 입니다.");
+        assertEquals(err.getMessage(), this.userPointRepository.idValidateErrorMessage);
     }
 }

@@ -27,7 +27,7 @@ public class MethodInsertChargePointById extends TestLocalCacheUserPointReposito
         });
 
         // THEN
-        assertEquals(err.getMessage(), "잘못된 ID 입니다.");
+        assertEquals(err.getMessage(), this.userPointRepository.idValidateErrorMessage);
 
     }
 
@@ -43,7 +43,7 @@ public class MethodInsertChargePointById extends TestLocalCacheUserPointReposito
         });
 
         // THEN
-        assertEquals(err.getMessage(), "금액은 0원 보다 높아야합니다.");
+        assertEquals(err.getMessage(), this.userPointRepository.amountValidateErrorMessage);
 
     }
 
@@ -60,7 +60,7 @@ public class MethodInsertChargePointById extends TestLocalCacheUserPointReposito
         });
 
         // THEN
-        assertEquals(exception.getMessage(),"금액은 0원 보다 높아야합니다.");
+        assertEquals(exception.getMessage(), this.userPointRepository.amountValidateErrorMessage);
 
     }
 

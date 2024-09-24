@@ -16,6 +16,9 @@ public class LocalCacheUserPointRepository implements UserPointRepository {
     final UserPointTable userPointTable;
     final PointHistoryTable pointHistoryTable;
 
+    public final String idValidateErrorMessage = "잘못된 ID 입니다.";
+    public final String amountValidateErrorMessage = "금액은 0원 보다 높아야합니다.";
+
 
     /** 생성자 함수
      * @param userPointTable UserPointTable
@@ -104,7 +107,7 @@ public class LocalCacheUserPointRepository implements UserPointRepository {
      */
     private void idValidate(long id){
         if(id <=0){
-            throw new IllegalArgumentException("잘못된 ID 입니다.");
+            throw new IllegalArgumentException(this.idValidateErrorMessage);
         }
     }
 
@@ -113,7 +116,7 @@ public class LocalCacheUserPointRepository implements UserPointRepository {
      */
     private void amountValidate(long amount){
         if(amount <=0){
-            throw new IllegalArgumentException("금액은 0원 보다 높아야합니다.");
+            throw new IllegalArgumentException(this.amountValidateErrorMessage);
         }
     }
 }
