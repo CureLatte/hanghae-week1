@@ -26,8 +26,6 @@ public class PointServiceImpl implements PointService {
 
         this.idValidator(id);
 
-        UserPoint userPoint = this.userPointRepository.findById(id);
-
         return this.userPointRepository.findById(id);
     }
 

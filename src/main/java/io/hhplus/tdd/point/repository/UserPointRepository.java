@@ -8,5 +8,4 @@ public interface UserPointRepository {
     public UserPoint findById(long id);
 
 
-
 }

@@ -30,4 +30,17 @@ public class MethodGetUserPointById extends TestPointService {
         assertEquals(err.getMessage(), this.pointService.ID_VALIDATOR_ERROR_MESSAGE);
 
     }
+
+    @Test
+    public void 포인트_조회_성공(){
+        // GIVEN
+        long id = 1;
+
+        // WHEN
+        when(this.userPointRepository.findById(id)).thenReturn(new UserPoint(id, 0, 0));
+        UserPoint userPoint = this.pointService.getUserPointById(id);
+
+        // THEN
+        assertEquals(userPoint.point(), 0);
+    }
 }
