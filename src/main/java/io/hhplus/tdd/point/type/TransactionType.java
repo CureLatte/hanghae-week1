@@ -1,4 +1,4 @@
-package io.hhplus.tdd.point.domain.vo;
+package io.hhplus.tdd.point.type;
 
 
 /**

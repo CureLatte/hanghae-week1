@@ -1,10 +1,12 @@
-package io.hhplus.tdd.point.presentation;
-import io.hhplus.tdd.point.application.PointService;
-import io.hhplus.tdd.point.domain.entity.PointHistory;
-import io.hhplus.tdd.point.domain.entity.UserPoint;
+package io.hhplus.tdd.point;
+import io.hhplus.tdd.point.record.PointHistory;
+import io.hhplus.tdd.point.record.UserPoint;
+import io.hhplus.tdd.point.type.TransactionType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -13,12 +15,6 @@ import java.util.Map;
 public class PointController {
 
     private static final Logger log = LoggerFactory.getLogger(PointController.class);
-
-    final private PointService pointService;
-
-    public PointController(PointService pointService) {
-        this.pointService = pointService;
-    }
 
 
     /**
@@ -29,7 +25,7 @@ public class PointController {
             @PathVariable long id
     ) {
 
-        return pointService.getUserPoint(id);
+        return new UserPoint(1, 0, 0);
 
     }
 
@@ -41,7 +37,12 @@ public class PointController {
             @PathVariable long id
     ) {
 
-        return this.pointService.getUserPointHistoryListById(id);
+
+        ArrayList<PointHistory> lists = null;
+
+        lists.add(new PointHistory(1, 1, 1, TransactionType.USE, 1));
+
+        return lists;
     }
 
     /**
@@ -54,7 +55,7 @@ public class PointController {
     ) {
         Long amount = requestBody.get("amount");
 
-        return this.pointService.chargePoint(id, amount);
+        return new UserPoint(0, 0 , 0);
     }
 
     /**
@@ -67,6 +68,6 @@ public class PointController {
     ) {
         Long amount = requestBody.get("amount");
 
-        return this.pointService.usePoint(id, amount);
+        return new UserPoint(0, 0 , 0);
     }
 }

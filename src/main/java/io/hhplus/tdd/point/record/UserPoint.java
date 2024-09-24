@@ -1,4 +1,4 @@
-package io.hhplus.tdd.point.domain.entity;
+package io.hhplus.tdd.point.record;
 
 public record UserPoint(
         long id,
