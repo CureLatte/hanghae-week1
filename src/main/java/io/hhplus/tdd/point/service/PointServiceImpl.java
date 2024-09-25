@@ -15,6 +15,8 @@ public class PointServiceImpl implements PointService {
 
     public final String ID_VALIDATOR_ERROR_MESSAGE = "잘못된 ID 입니다";
     public final String AMOUNT_VALIDATOR_ERROR_MESSAGE = "금액은 0원 이상이어야 합니다";
+    public final String MAX_POINT_VALIDATOR_ERROR_MESSAGE = "보유 가능한 최대 포인트 금액은 1,000,000 포인트 입니다.";
+    public final String MAX_CHARGE_POINT_VALIDATOR_ERROR_MESSAGE = "한번에 충전 가능한 최대 포인트느 100,000 포인트 입니다.";
 
 
     /** 생성자 의존성 주입
@@ -60,6 +62,18 @@ public class PointServiceImpl implements PointService {
 
         this.idValidator(userId);
         this.amountValidator(amount);
+
+        if(amount > 100000){
+            // 최대 충전금액
+            throw new IllegalArgumentException(this.MAX_CHARGE_POINT_VALIDATOR_ERROR_MESSAGE);
+        }
+
+        // 최대 잔고 에러
+        UserPoint userPoint = this.userPointRepository.findById(userId);
+        if(userPoint.point() + amount >= 1000000) {
+            // 최대 1,000,000 원
+            throw new IllegalArgumentException(this.MAX_POINT_VALIDATOR_ERROR_MESSAGE);
+        }
 
         // point 내역 생성
         this.pointHistoryRepository.createChargePoint(userId, amount);
