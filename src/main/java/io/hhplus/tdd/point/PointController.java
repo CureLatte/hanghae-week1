@@ -55,7 +55,6 @@ public class PointController {
             @RequestBody Map<String, Long> requestBody
     ) {
         Long amount = requestBody.get("amount");
-
         return this.pointService.chargePointById(id, amount);
     }
 
