@@ -50,6 +50,23 @@ public class PointServiceImpl implements PointService {
         return this.pointHistoryRepository.findAllById(id);
     }
 
+    /** 포인트 충전하기
+     * @param userId long
+     * @param amount long
+     * @return UserPoint
+     */
+    @Override
+    public UserPoint chargePointById(long userId, long amount) {
+
+        this.idValidator(userId);
+        this.amountValidator(amount);
+
+        // point 내역 생성
+        this.pointHistoryRepository.createChargePoint(userId, amount);
+
+        // point 추가
+        return this.userPointRepository.increasePoint(userId, amount);
+    }
 
 
     public void idValidator(long id){
