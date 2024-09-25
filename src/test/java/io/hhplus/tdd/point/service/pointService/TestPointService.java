@@ -3,6 +3,7 @@ package io.hhplus.tdd.point.service.pointService;
 import io.hhplus.tdd.database.UserPointTable;
 import io.hhplus.tdd.point.record.UserPoint;
 import io.hhplus.tdd.point.repository.LocalUserPointRepository;
+import io.hhplus.tdd.point.repository.PointHistoryRepository;
 import io.hhplus.tdd.point.repository.UserPointRepository;
 import io.hhplus.tdd.point.service.PointService;
 import io.hhplus.tdd.point.service.PointServiceImpl;
@@ -16,11 +17,15 @@ import static org.mockito.Mockito.mock;
 
 public class TestPointService {
     UserPointRepository userPointRepository;
+    PointHistoryRepository pointHistoryRepository;
+
     PointServiceImpl pointService;
 
     public TestPointService() {
         this.userPointRepository = mock(UserPointRepository.class);
-        this.pointService = new PointServiceImpl(this.userPointRepository);
+        this.pointHistoryRepository = mock(PointHistoryRepository.class);
+
+        this.pointService = new PointServiceImpl(this.userPointRepository, this.pointHistoryRepository);
 
     }
 

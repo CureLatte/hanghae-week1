@@ -2,9 +2,11 @@ package io.hhplus.tdd.point.repository;
 
 import io.hhplus.tdd.database.PointHistoryTable;
 import io.hhplus.tdd.point.record.PointHistory;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public class LocalPointHistoryRepository implements PointHistoryRepository {
     PointHistoryTable pointHistoryTable;
 
