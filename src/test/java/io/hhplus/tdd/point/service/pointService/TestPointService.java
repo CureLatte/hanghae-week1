@@ -24,7 +24,6 @@ public class TestPointService {
     public TestPointService() {
         this.userPointRepository = mock(UserPointRepository.class);
         this.pointHistoryRepository = mock(PointHistoryRepository.class);
-
         this.pointService = new PointServiceImpl(this.userPointRepository, this.pointHistoryRepository);
 
     }
