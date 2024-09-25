@@ -1,6 +1,7 @@
 package io.hhplus.tdd.point;
 import io.hhplus.tdd.point.record.PointHistory;
 import io.hhplus.tdd.point.record.UserPoint;
+import io.hhplus.tdd.point.service.PointService;
 import io.hhplus.tdd.point.type.TransactionType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +16,12 @@ import java.util.Map;
 public class PointController {
 
     private static final Logger log = LoggerFactory.getLogger(PointController.class);
+
+    final PointService pointService;
+
+    public PointController(PointService pointService) {
+        this.pointService = pointService;
+    }
 
 
     /**
@@ -36,13 +43,7 @@ public class PointController {
     public List<PointHistory> history(
             @PathVariable long id
     ) {
-
-
-        ArrayList<PointHistory> lists = null;
-
-        lists.add(new PointHistory(1, 1, 1, TransactionType.USE, 1));
-
-        return lists;
+        return this.pointService.getUserPointHistoryListById(id);
     }
 
     /**
