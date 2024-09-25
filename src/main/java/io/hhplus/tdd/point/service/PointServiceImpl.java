@@ -86,6 +86,11 @@ public class PointServiceImpl implements PointService {
         return this.userPointRepository.increasePoint(userId, amount);
     }
 
+    /** 포인트 사용하기
+     * @param userId long
+     * @param amount long
+     * @return UserPoint
+     */
     @Override
     public UserPoint usePointById(long userId, long amount) {
         this.idValidator(userId);
