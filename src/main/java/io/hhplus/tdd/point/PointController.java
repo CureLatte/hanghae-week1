@@ -32,7 +32,7 @@ public class PointController {
             @PathVariable long id
     ) {
 
-        return new UserPoint(1, 0, 0);
+        return this.pointService.getUserPointById(id);
 
     }
 
