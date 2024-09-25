@@ -29,7 +29,7 @@ public class LocalPointHistoryRepository implements PointHistoryRepository {
     @Override
     public PointHistory createChargePoint(long userId, long amount) {
         long nowMils = System.currentTimeMillis();
-        return this.pointHistoryTable.insert(userId, amount, TransactionType.USE, nowMils);
+        return this.pointHistoryTable.insert(userId, amount, TransactionType.CHARGE, nowMils);
     }
 
 }
