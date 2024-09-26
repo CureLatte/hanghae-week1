@@ -1,6 +1,6 @@
 package io.hhplus.tdd.point.service.pointService;
 
-import io.hhplus.tdd.point.record.UserPoint;
+import io.hhplus.tdd.point.domain.vo.UserPoint;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

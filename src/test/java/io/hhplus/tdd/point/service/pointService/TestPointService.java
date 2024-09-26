@@ -1,11 +1,7 @@
 package io.hhplus.tdd.point.service.pointService;
 
-import io.hhplus.tdd.database.UserPointTable;
-import io.hhplus.tdd.point.record.UserPoint;
-import io.hhplus.tdd.point.repository.LocalUserPointRepository;
 import io.hhplus.tdd.point.repository.PointHistoryRepository;
 import io.hhplus.tdd.point.repository.UserPointRepository;
-import io.hhplus.tdd.point.service.PointService;
 import io.hhplus.tdd.point.service.PointServiceImpl;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;

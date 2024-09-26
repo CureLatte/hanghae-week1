@@ -1,11 +1,7 @@
 package io.hhplus.tdd.point.service.pointService;
 
-import io.hhplus.tdd.point.record.PointHistory;
-import io.hhplus.tdd.point.record.UserPoint;
-import io.hhplus.tdd.point.type.TransactionType;
+import io.hhplus.tdd.point.domain.vo.UserPoint;
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;

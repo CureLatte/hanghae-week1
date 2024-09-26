@@ -1,13 +1,11 @@
-package io.hhplus.tdd.point;
-import io.hhplus.tdd.point.record.PointHistory;
-import io.hhplus.tdd.point.record.UserPoint;
+package io.hhplus.tdd.point.interfaces;
+import io.hhplus.tdd.point.domain.vo.PointHistory;
+import io.hhplus.tdd.point.domain.vo.UserPoint;
 import io.hhplus.tdd.point.service.PointService;
-import io.hhplus.tdd.point.type.TransactionType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
