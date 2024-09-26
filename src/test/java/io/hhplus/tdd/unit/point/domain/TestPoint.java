@@ -1,4 +1,4 @@
-package io.hhplus.tdd.point.domain;
+package io.hhplus.tdd.unit.point.domain;
 
 import io.hhplus.tdd.point.domain.entity.Point;
 import io.hhplus.tdd.point.domain.vo.BusinessError;
@@ -171,6 +171,8 @@ public class TestPoint {
         long updateMillis = 0;
 
         UserPoint userPoint = new UserPoint(id, amount, updateMillis);
+
+        System.out.println(userPoint);
 
         // WHEN
         Point point = new Point(userPoint);
