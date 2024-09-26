@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface IPointHistoryRepository {
     public List<PointLog> findAllById(long id);
-    public PointLog createHistory(PointLog pointHistory);
+    public PointLog createChargeHistory(long id, long amount);
 }

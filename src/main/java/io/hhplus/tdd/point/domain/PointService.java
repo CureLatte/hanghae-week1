@@ -29,7 +29,15 @@ public class PointService {
     }
 
     public Point chargePointById(long id, long amount){
-        return new Point(new UserPoint(0, 0, 0));
+
+        Point point = this.userPointRepository.findOneById(id);
+
+        point.charge(amount);
+
+        // point History 생성
+        PointLog pointLog = this.pointHistoryRepository.createChargeHistory(id, amount);
+
+        return this.userPointRepository.save(point);
     }
 
 
