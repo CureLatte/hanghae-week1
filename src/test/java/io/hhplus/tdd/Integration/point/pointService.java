@@ -188,7 +188,7 @@ public class pointService extends BaseIntegrationTest {
     }
 
     @Test
-    public void 동시성_충전_성공() throws Exception {
+    public void 동시_충전_성공() throws Exception {
         // GIVEN
         int threadCount = 10;
 
@@ -308,7 +308,7 @@ public class pointService extends BaseIntegrationTest {
 
 
     @Test
-    public void 동시성_충전_사용_동시_성공() throws Exception {
+    public void 동시_충전_사용_조회_성공() throws Exception {
         // GIVEN
         int threadCount = 20;
 
