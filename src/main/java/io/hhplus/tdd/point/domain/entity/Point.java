@@ -65,4 +65,8 @@ public class Point {
         this.point -= amount;
     }
 
+    public UserPoint toUserPoint(){
+        return new UserPoint(this.userId, this.point, this.updateMillis);
+    }
+
 }

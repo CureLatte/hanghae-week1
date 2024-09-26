@@ -21,6 +21,10 @@ public class PointLog {
 
     }
 
+    public PointHistory toPointHistory(){
+        return new PointHistory(this.id, this.userId, this.amount, this.type, this.updateMillis);
+    }
+
 
 
 }

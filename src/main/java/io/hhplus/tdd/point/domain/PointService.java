@@ -24,7 +24,8 @@ public class PointService {
     }
 
     public List<PointLog> getUserPointHistoryListById(long id){
-        return null;
+
+        return this.pointHistoryRepository.findAllById(id);
     }
 
     public Point chargePointById(long id, long amount){
