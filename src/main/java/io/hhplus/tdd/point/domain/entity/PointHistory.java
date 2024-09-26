@@ -9,14 +9,19 @@ public class PointHistory {
     long userId;
     TransactionType type;
     long updateMillis;
-
+    long amount;
 
     public PointHistory(PointHistory pointHistory) {
         this.id = pointHistory.id;
         this.userId = pointHistory.userId;
         this.type = pointHistory.type;
         this.updateMillis = pointHistory.updateMillis;
+        this.amount = pointHistory.amount;
+
     }
+
+
+
 
 
 }

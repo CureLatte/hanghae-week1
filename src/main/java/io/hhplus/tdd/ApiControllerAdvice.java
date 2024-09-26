@@ -1,5 +1,6 @@
 package io.hhplus.tdd;
 
+import io.hhplus.tdd.point.domain.vo.BusinessError;
 import io.hhplus.tdd.point.domain.vo.ErrorResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -20,4 +21,9 @@ class ApiControllerAdvice extends ResponseEntityExceptionHandler {
         return ResponseEntity.status(500).body(new ErrorResponse("500", errMessage));
     }
 
+    @ExceptionHandler(value = BusinessError.class)
+    public ResponseEntity<ErrorResponse> handleBusinessError(BusinessError businessError) {
+
+        return ResponseEntity.status(500).body(new ErrorResponse("500", businessError.getMessage()));
+    }
 }
