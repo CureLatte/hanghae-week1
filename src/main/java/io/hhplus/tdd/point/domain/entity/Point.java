@@ -13,7 +13,7 @@ public class Point {
     long point;
 
     final String AMOUNT_VALIDATOR_ERROR_MESSAGE = "금액은 0보다 작을 수 없습니다.";
-
+    final String ID_VALIDATOR_ERROR_MESSAGE = "ID 는 0보다 작음ㄹ 수 없습니다.";
 
     final String CHARGE_MAX_POINT_ERROR_MESSAGE = "충전 가능한 최대 금액은 100,000 포인트 입니다.";
     final String OVER_BALANCE_ERROR_MESSAGE= "최대 보유 포인트 금액은 1,000,000 포인트입니다.";
@@ -24,6 +24,10 @@ public class Point {
     final long BALANCE_MIN_POINT = 0;
 
     public Point(UserPoint userPoint) {
+        if(userPoint.id() <0){
+            throw new BusinessError(ID_VALIDATOR_ERROR_MESSAGE);
+        }
+
         this.userId = userPoint.id();
         this.point = userPoint.point();
     }

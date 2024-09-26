@@ -1,9 +1,8 @@
 package io.hhplus.tdd.point.domain;
 
 import io.hhplus.tdd.point.domain.entity.Point;
-import io.hhplus.tdd.point.domain.entity.PointHistory;
+import io.hhplus.tdd.point.domain.entity.PointLog;
 import io.hhplus.tdd.point.domain.repository.IPointHistoryRepository;
-import io.hhplus.tdd.point.domain.vo.TransactionType;
 import io.hhplus.tdd.point.domain.vo.UserPoint;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -24,7 +23,7 @@ public class PointService {
         return new Point(new UserPoint(0, 0, 0));
     }
 
-    public List<PointHistory> getUserPointHistoryListById(long id){
+    public List<PointLog> getUserPointHistoryListById(long id){
         return null;
     }
 
