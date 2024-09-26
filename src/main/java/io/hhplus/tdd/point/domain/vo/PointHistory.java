@@ -1,6 +1,4 @@
-package io.hhplus.tdd.point.record;
-
-import io.hhplus.tdd.point.type.TransactionType;
+package io.hhplus.tdd.point.domain.vo;
 
 public record PointHistory(
         long id,
