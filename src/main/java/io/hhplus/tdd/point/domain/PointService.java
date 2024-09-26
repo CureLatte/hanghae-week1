@@ -4,15 +4,24 @@ import io.hhplus.tdd.point.domain.entity.Point;
 import io.hhplus.tdd.point.domain.entity.PointLog;
 import io.hhplus.tdd.point.domain.repository.IPointHistoryRepository;
 import io.hhplus.tdd.point.domain.repository.IUserPointRepository;
+import io.hhplus.tdd.point.domain.vo.BusinessError;
+import io.hhplus.tdd.point.domain.vo.PatchPointType;
 import io.hhplus.tdd.point.domain.vo.UserPoint;
+import org.springframework.boot.context.properties.bind.BindException;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 @Service
 public class PointService {
 
     IPointHistoryRepository pointHistoryRepository;
     IUserPointRepository userPointRepository;
+
+
+    final ConcurrentHashMap <Long, Lock> patchPointTypeMap = new ConcurrentHashMap <Long, Lock>();
 
     public PointService(IUserPointRepository userPointRepository , IPointHistoryRepository pointHistoryRepository ) {
         this.pointHistoryRepository = pointHistoryRepository;
@@ -35,29 +44,69 @@ public class PointService {
         return this.pointHistoryRepository.findAllById(id);
     }
 
+    public void Lock(long id){
+
+
+    }
+
     public Point chargePointById(long id, long amount){
 
-        Point point = this.userPointRepository.findOneById(id);
+        System.out.println("RUN CHARGE POINT!!");
+        Lock lock = patchPointTypeMap.computeIfAbsent(id, k -> new ReentrantLock(true));
+        lock.lock();
 
-        point.charge(amount);
+        try {
+            System.out.println("UPDATE POINT2: " );
+            Point point = this.userPointRepository.findOneById(id);
 
-        // point History 생성
-        PointLog pointLog = this.pointHistoryRepository.createChargeHistory(id, amount);
+            point.charge(amount);
+            System.out.println("UPDATE POINT: " + point.toString());
 
-        return this.userPointRepository.save(point);
+            // point History 생성
+            PointLog pointLog = this.pointHistoryRepository.createChargeHistory(id, amount);
+
+
+            Point updatePoint =  this.userPointRepository.save(point);
+
+            return updatePoint;
+
+        } finally {
+            lock.unlock();
+
+        }
+
+
     }
 
 
+    /**
+     * @param id long
+     * @param amount long
+     * @return Point
+     */
     public Point usePointById(long id, long amount){
+        System.out.println("USE POINT START " );
+        Lock lock = patchPointTypeMap.computeIfAbsent(id, k -> new ReentrantLock(true));
+        lock.lock();
 
-        Point point = userPointRepository.findOneById(id);
+        try {
 
-        point.use(amount);
 
-        // PointHistory
-        PointLog pointLog  = this.pointHistoryRepository.createUseHistory(id, amount);
+            Point point = userPointRepository.findOneById(id);
 
-        return this.userPointRepository.save(point);
+            point.use(amount);
+
+            // PointHistory
+            PointLog pointLog  = this.pointHistoryRepository.createUseHistory(id, amount);
+
+            Point newPoint =  this.userPointRepository.save(point);
+
+            return newPoint;
+
+        } finally {
+            lock.unlock();
+        }
+
     }
 
 
