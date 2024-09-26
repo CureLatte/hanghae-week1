@@ -42,7 +42,16 @@ public class PointService {
 
 
     public Point usePointById(long id, long amount){
-        return new Point(new UserPoint(0, 0, 0));
+
+        Point point = userPointRepository.findOneById(id);
+
+        point.use(amount);
+
+        // PointHistory
+        PointLog pointLog  = this.pointHistoryRepository.createUseHistory(id, amount);
+
+
+        return this.userPointRepository.save(point);
     }
 
 
