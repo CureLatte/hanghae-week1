@@ -1,7 +1,9 @@
 package io.hhplus.tdd.point.domain.entity;
 
 import io.hhplus.tdd.point.domain.vo.TransactionType;
+import lombok.Getter;
 
+@Getter
 public class PointHistory {
     long id;
     long userId;
