@@ -244,11 +244,11 @@ public class pointService extends BaseIntegrationTest {
 
 
     @Test
-    public void 동시성_사용_성공() throws Exception {
+    public void 동시_사용_성공() throws Exception {
         // GIVEN
-        int threadCount = 10;
+        int threadCount = 50;
 
-        long id = 10;
+        long id = 2;
         long amount = 1L;
 
         this.userPointRepository.save(new Point(new UserPoint(id, amount * threadCount, 0)));
@@ -265,10 +265,12 @@ public class pointService extends BaseIntegrationTest {
         List<CompletableFuture> futures = new ArrayList<>(threadCount);
 
         for(int i = 0; i < threadCount; i++){
+
             // 비동기 요청을 위한
             CompletableFuture<Void> completableFuture = CompletableFuture.runAsync(() -> {
 
                 try {
+
                     ResultActions resultActions = mvc.perform(
                             patch("/point/" + id + "/use")
                                     .contentType(MediaType.APPLICATION_JSON)
@@ -278,10 +280,14 @@ public class pointService extends BaseIntegrationTest {
 
                     resultActions
                             .andExpect(status().isOk());
+
+
+
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
             }, executorService);
+
 
             futures.add(completableFuture);
         }
@@ -304,12 +310,14 @@ public class pointService extends BaseIntegrationTest {
     @Test
     public void 동시성_충전_사용_동시_성공() throws Exception {
         // GIVEN
-        int threadCount = 10;
+        int threadCount = 20;
 
-        long id = 10;
+        long useId = 10;
+        long chargeId = 100;
+        long getId = 101;
         long amount = 1L;
 
-        this.userPointRepository.save(new Point(new UserPoint(id, amount * threadCount, 0)));
+        this.userPointRepository.save(new Point(new UserPoint(useId, amount * threadCount, 0)));
 
 
         // WHEN
@@ -327,22 +335,77 @@ public class pointService extends BaseIntegrationTest {
             CompletableFuture<Void> completableFuture = CompletableFuture.runAsync(() -> {
 
                 try {
-                    ResultActions resultActions = mvc.perform(
-                            patch("/point/" + id + "/use")
+
+                    ResultActions chargeResultActions = mvc.perform(
+                            patch("/point/" + chargeId + "/charge")
                                     .contentType(MediaType.APPLICATION_JSON)
                                     .accept(MediaType.APPLICATION_JSON)
                                     .content(objectMapper.writeValueAsString(requestBody))
                     );
 
-                    resultActions
+                    chargeResultActions
                             .andExpect(status().isOk());
+
+
+
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
             }, executorService);
 
             futures.add(completableFuture);
+
+            completableFuture = CompletableFuture.runAsync(() -> {
+
+                try {
+
+
+                    ResultActions useResultActions = mvc.perform(
+                            patch("/point/" + useId + "/use")
+                                    .contentType(MediaType.APPLICATION_JSON)
+                                    .accept(MediaType.APPLICATION_JSON)
+                                    .content(objectMapper.writeValueAsString(requestBody))
+                    );
+
+                    useResultActions
+                            .andExpect(status().isOk());
+
+
+
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }, executorService);
+
+
+            futures.add(completableFuture);
+            completableFuture = CompletableFuture.runAsync(() -> {
+
+                try {
+
+
+                    ResultActions getResultActions = mvc.perform(
+                            get("/point/" + getId)
+                                    .contentType(MediaType.APPLICATION_JSON)
+                                    .accept(MediaType.APPLICATION_JSON)
+
+                    );
+
+                    getResultActions
+                            .andExpect(status().isOk());
+
+
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }, executorService);
+
+
+            futures.add(completableFuture);
+
         }
+
+        sleep(5000);
 
         for(CompletableFuture future : futures){
             future.join();
@@ -350,11 +413,17 @@ public class pointService extends BaseIntegrationTest {
 
 
         // THEN
-        Point point = this.userPointRepository.findOneById(id);
+        Point chargePoint = this.userPointRepository.findOneById(chargeId);
+        assertEquals(amount * threadCount, chargePoint.getPoint());
 
-        System.out.println(point.getUserId());
-        System.out.println(point.getPoint());
+        Point usePoint = this.userPointRepository.findOneById(useId);
+        assertEquals(0, usePoint.getPoint());
 
-        assertEquals(0, point.getPoint());
+        Point getPoint = this.userPointRepository.findOneById(getId);
+        assertEquals(0, getPoint.getPoint());
     }
+
+
+
+
 }

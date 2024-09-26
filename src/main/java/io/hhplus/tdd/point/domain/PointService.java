@@ -33,6 +33,7 @@ public class PointService {
      * @return Point
      */
     public Point getUserPointById(long id) {
+        System.out.println("GET POINT START");
         return this.userPointRepository.findOneById(id);
     }
 
@@ -51,16 +52,14 @@ public class PointService {
 
     public Point chargePointById(long id, long amount){
 
-        System.out.println("RUN CHARGE POINT!!");
+        System.out.println("CHARGE POINT START");
         Lock lock = patchPointTypeMap.computeIfAbsent(id, k -> new ReentrantLock(true));
         lock.lock();
 
         try {
-            System.out.println("UPDATE POINT2: " );
             Point point = this.userPointRepository.findOneById(id);
 
             point.charge(amount);
-            System.out.println("UPDATE POINT: " + point.toString());
 
             // point History 생성
             PointLog pointLog = this.pointHistoryRepository.createChargeHistory(id, amount);
@@ -85,7 +84,7 @@ public class PointService {
      * @return Point
      */
     public Point usePointById(long id, long amount){
-        System.out.println("USE POINT START " );
+        System.out.println("USE POINT START");
         Lock lock = patchPointTypeMap.computeIfAbsent(id, k -> new ReentrantLock(true));
         lock.lock();
 
