@@ -31,4 +31,11 @@ public class PointHistoryRepository implements IPointHistoryRepository {
         PointHistory pointHistory = this.pointHistoryTable.insert(id, amount, TransactionType.CHARGE, now);
         return new PointLog(pointHistory);
     }
+
+    @Override
+    public PointLog createUseHistory(long id, long amount) {
+        long now = System.currentTimeMillis();
+        PointHistory pointHistory = this.pointHistoryTable.insert(id, amount, TransactionType.USE, now);
+        return new PointLog(pointHistory);
+    }
 }
