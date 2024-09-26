@@ -19,12 +19,19 @@ public class PointService {
         this.userPointRepository = userPointRepository;
     }
 
+    /** 포인트 조회
+     * @param id long
+     * @return Point
+     */
     public Point getUserPointById(long id) {
         return this.userPointRepository.findOneById(id);
     }
 
+    /**
+     * @param id long
+     * @return List<PointLog>
+     */
     public List<PointLog> getUserPointHistoryListById(long id){
-
         return this.pointHistoryRepository.findAllById(id);
     }
 
@@ -49,7 +56,6 @@ public class PointService {
 
         // PointHistory
         PointLog pointLog  = this.pointHistoryRepository.createUseHistory(id, amount);
-
 
         return this.userPointRepository.save(point);
     }
