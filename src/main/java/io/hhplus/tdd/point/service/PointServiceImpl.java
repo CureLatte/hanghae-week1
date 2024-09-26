@@ -97,7 +97,8 @@ public class PointServiceImpl implements PointService {
         this.amountValidator(amount);
 
         UserPoint userPoint = this.userPointRepository.findById(userId);
-        if(userPoint.point() <= this.USE_MIN_POINT) {
+
+        if(userPoint.point() - amount <=this.USE_MIN_POINT) {
             throw new IllegalArgumentException(this.USE_MIN_POINT_VALIDATOR_ERROR_MESSAGE);
         }
 
