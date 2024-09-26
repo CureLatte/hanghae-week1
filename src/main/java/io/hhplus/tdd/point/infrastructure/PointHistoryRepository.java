@@ -4,6 +4,7 @@ import io.hhplus.tdd.database.PointHistoryTable;
 import io.hhplus.tdd.point.domain.entity.PointLog;
 import io.hhplus.tdd.point.domain.repository.IPointHistoryRepository;
 import io.hhplus.tdd.point.domain.vo.PointHistory;
+import io.hhplus.tdd.point.domain.vo.TransactionType;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -25,8 +26,9 @@ public class PointHistoryRepository implements IPointHistoryRepository {
     }
 
     @Override
-    public PointLog createHistory(PointLog pointLog) {
-        PointHistory pointHistory = this.pointHistoryTable.insert(pointLog.getUserId(), pointLog.getAmount(), pointLog.getType(), pointLog.getUpdateMillis());
+    public PointLog createChargeHistory(long id, long amount) {
+        long now = System.currentTimeMillis();
+        PointHistory pointHistory = this.pointHistoryTable.insert(id, amount, TransactionType.CHARGE, now);
         return new PointLog(pointHistory);
     }
 }
