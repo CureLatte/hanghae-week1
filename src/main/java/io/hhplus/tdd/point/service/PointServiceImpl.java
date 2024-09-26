@@ -17,6 +17,9 @@ public class PointServiceImpl implements PointService {
     public final String AMOUNT_VALIDATOR_ERROR_MESSAGE = "금액은 0원 이상이어야 합니다";
     public final String MAX_POINT_VALIDATOR_ERROR_MESSAGE = "보유 가능한 최대 포인트 금액은 1,000,000 포인트 입니다.";
     public final String MAX_CHARGE_POINT_VALIDATOR_ERROR_MESSAGE = "한번에 충전 가능한 최대 포인트느 100,000 포인트 입니다.";
+    public final String USE_MIN_POINT_VALIDATOR_ERROR_MESSAGE = "사용 가능한 포인트가 존재하지 않습니다.";
+
+    public final long USE_MIN_POINT = 0;
     public final long MAX_POINT = 1000000;
     public final long MAX_CHARGE_POINT = 100000;
 
@@ -81,6 +84,27 @@ public class PointServiceImpl implements PointService {
 
         // point 추가
         return this.userPointRepository.increasePoint(userId, amount);
+    }
+
+    /** 포인트 사용하기
+     * @param userId long
+     * @param amount long
+     * @return UserPoint
+     */
+    @Override
+    public UserPoint usePointById(long userId, long amount) {
+        this.idValidator(userId);
+        this.amountValidator(amount);
+
+        UserPoint userPoint = this.userPointRepository.findById(userId);
+
+        if(userPoint.point() - amount <=this.USE_MIN_POINT) {
+            throw new IllegalArgumentException(this.USE_MIN_POINT_VALIDATOR_ERROR_MESSAGE);
+        }
+
+        this.pointHistoryRepository.createUsePoint(userId, amount);
+
+        return this.userPointRepository.decreasePoint(userId, amount);
     }
 
 

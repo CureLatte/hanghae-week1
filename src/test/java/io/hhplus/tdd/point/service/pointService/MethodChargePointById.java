@@ -81,5 +81,4 @@ public class MethodChargePointById extends TestPointService {
         assertEquals(err.getMessage(), this.pointService.MAX_POINT_VALIDATOR_ERROR_MESSAGE);
     }
 
-
 }

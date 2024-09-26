@@ -21,7 +21,7 @@ public class LocalPointHistoryRepository implements PointHistoryRepository {
         return this.pointHistoryTable.selectAllByUserId(id);
     }
 
-    /** 사용 포인트 내역 생성
+    /** 충전 포인트 내역 생성
      * @param userId long
      * @param amount long
      * @return PointHistory
@@ -30,6 +30,17 @@ public class LocalPointHistoryRepository implements PointHistoryRepository {
     public PointHistory createChargePoint(long userId, long amount) {
         long nowMils = System.currentTimeMillis();
         return this.pointHistoryTable.insert(userId, amount, TransactionType.CHARGE, nowMils);
+    }
+
+    /** 사용 포인트 내역 생성
+     * @param userId long
+     * @param amount long
+     * @return PointHistory
+     */
+    @Override
+    public PointHistory createUsePoint(long userId, long amount) {
+        long nowMils = System.currentTimeMillis();
+        return this.pointHistoryTable.insert(userId, amount, TransactionType.USE, nowMils);
     }
 
 }

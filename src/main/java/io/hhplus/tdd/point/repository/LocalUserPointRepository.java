@@ -29,5 +29,17 @@ public class LocalUserPointRepository implements UserPointRepository {
         return this.userPointTable.insertOrUpdate(id, userPoint.point() + amount);
     }
 
+    /** 포인트 내리기
+     * @param id long
+     * @param amount long
+     * @return UserPoint
+     */
+    @Override
+    public UserPoint decreasePoint(long id, long amount) {
+        //  현재 포인트 조회
+        UserPoint userPoint = this.userPointTable.selectById(id);
+        return this.userPointTable.insertOrUpdate(id, userPoint.point() - amount);
+    }
+
 
 }

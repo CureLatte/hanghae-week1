@@ -68,6 +68,6 @@ public class PointController {
     ) {
         Long amount = requestBody.get("amount");
 
-        return new UserPoint(0, 0 , 0);
+        return this.pointService.usePointById(id, amount);
     }
 }

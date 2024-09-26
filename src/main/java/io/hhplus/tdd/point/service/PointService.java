@@ -10,5 +10,5 @@ public interface PointService {
     public List<PointHistory> getUserPointHistoryListById(long id);
 
     public UserPoint chargePointById(long userId, long amount);
-
+    public UserPoint usePointById(long userId, long amount);
 }
