@@ -16,7 +16,7 @@ public class UserPointRepository implements IUserPointRepository {
 
 
     @Override
-    public Point findById(long id) {
+    public Point findOneById(long id) {
         UserPoint userPoint = this.userPointTable.selectById(id);
         return new Point(userPoint);
     }

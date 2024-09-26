@@ -3,6 +3,7 @@ package io.hhplus.tdd.point.domain;
 import io.hhplus.tdd.point.domain.entity.Point;
 import io.hhplus.tdd.point.domain.entity.PointLog;
 import io.hhplus.tdd.point.domain.repository.IPointHistoryRepository;
+import io.hhplus.tdd.point.domain.repository.IUserPointRepository;
 import io.hhplus.tdd.point.domain.vo.UserPoint;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -11,16 +12,15 @@ import java.util.List;
 public class PointService {
 
     IPointHistoryRepository pointHistoryRepository;
-    IPointHistoryRepository userPointRepository;
+    IUserPointRepository userPointRepository;
 
-    public PointService(IPointHistoryRepository pointHistoryRepository, IPointHistoryRepository userPointRepository) {
+    public PointService(IUserPointRepository userPointRepository , IPointHistoryRepository pointHistoryRepository ) {
         this.pointHistoryRepository = pointHistoryRepository;
         this.userPointRepository = userPointRepository;
     }
 
     public Point getUserPointById(long id) {
-
-        return new Point(new UserPoint(0, 0, 0));
+        return this.userPointRepository.findOneById(id);
     }
 
     public List<PointLog> getUserPointHistoryListById(long id){

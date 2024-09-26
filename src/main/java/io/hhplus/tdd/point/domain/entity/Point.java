@@ -1,5 +1,6 @@
 package io.hhplus.tdd.point.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.hhplus.tdd.point.domain.vo.BusinessError;
 import io.hhplus.tdd.point.domain.vo.PointHistory;
 import io.hhplus.tdd.point.domain.vo.UserPoint;
@@ -11,6 +12,7 @@ import java.util.List;
 public class Point {
     long userId;
     long point;
+    long updateMillis;
 
     final String AMOUNT_VALIDATOR_ERROR_MESSAGE = "금액은 0보다 작을 수 없습니다.";
     final String ID_VALIDATOR_ERROR_MESSAGE = "ID 는 0보다 작음ㄹ 수 없습니다.";
@@ -30,7 +32,9 @@ public class Point {
 
         this.userId = userPoint.id();
         this.point = userPoint.point();
+        this.updateMillis = userPoint.updateMillis();
     }
+
 
     public void charge(long amount){
         if(amount <=0){
